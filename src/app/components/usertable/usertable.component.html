@@ -1,0 +1,60 @@
+<div class="w-full h-full p-10">
+  <table class="table-auto w-full h-full m-5">
+    <thead>
+      <tr class="bg-[#aaa9a9] h-10 font-bold">
+        <td>NAME</td>
+        <td>Company Name</td>
+        <td>Designation</td>
+      </tr>
+    </thead>
+    <tr class="h-10 mt-2">
+      <td>
+
+        <input
+          type="text"
+          placeholder="search..."
+          class="border-1 bg-slate-200 w-full py-2 m-2 border-gray-400"
+          [(ngModel)]="name"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          placeholder="search..."
+          class="border-1 bg-slate-200 w-full py-2 m-2 border-gray-400"
+          [(ngModel)]="companyName"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          placeholder="search..."
+          class="border-1 bg-slate-200 w-full py-2 m-2 border-gray-400"
+          [(ngModel)]="designation"
+        />
+      </td>
+    </tr>
+    <tbody class="mt-4">
+      <tr
+        *ngFor="
+          let user of userData
+            | async
+            | search : 'name' : name
+            | search : 'companyName' : companyName
+            | search : 'designation' : designation
+        "
+        class="border-2 mb-4 h-10 hover:bg-slate-500"
+        [ngClass]="{
+          'bg-[#92eb92]': user.company.designation == 'angular Developer'
+        }"
+      >
+        <td >
+         <p>{{ user.name }}</p>
+          {{ user.email }}
+        </td>
+        <td>{{ user.company.name }}</td>
+        <td>{{ user.company.designation }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
